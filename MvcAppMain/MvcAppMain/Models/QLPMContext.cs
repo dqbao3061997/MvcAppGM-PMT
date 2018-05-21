@@ -8,11 +8,14 @@ namespace MvcAppMain.Models
     public partial class QLPMContext : DbContext
     {
         public QLPMContext()
-            : base("name=QLPMContext3")
+            : base("name=QLPMContext")
         {
         }
 
         public virtual DbSet<Benh> Benhs { get; set; }
+        public virtual DbSet<BK_CT_PhieuKhamBenh> BK_CT_PhieuKhamBenh { get; set; }
+        public virtual DbSet<BK_HoaDon> BK_HoaDon { get; set; }
+        public virtual DbSet<BK_PhieuKhamBenh> BK_PhieuKhamBenh { get; set; }
         public virtual DbSet<CachDung> CachDungs { get; set; }
         public virtual DbSet<CT_PhieuKhamBenh> CT_PhieuKhamBenh { get; set; }
         public virtual DbSet<DonVi> DonVis { get; set; }
@@ -34,9 +37,27 @@ namespace MvcAppMain.Models
                 .WithRequired(e => e.Benh)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Benh>()
+                .HasMany(e => e.BK_PhieuKhamBenh)
+                .WithRequired(e => e.Benh)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BK_HoaDon>()
+                .Property(e => e.GhiChu)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BK_PhieuKhamBenh>()
+                .Property(e => e.TrieuChung)
+                .IsUnicode(false);
+
             modelBuilder.Entity<CachDung>()
                 .Property(e => e.TenCachDung)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<CachDung>()
+                .HasMany(e => e.BK_CT_PhieuKhamBenh)
+                .WithRequired(e => e.CachDung)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CachDung>()
                 .HasMany(e => e.CT_PhieuKhamBenh)
@@ -65,6 +86,11 @@ namespace MvcAppMain.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HoSoBenhNhan>()
+                .HasMany(e => e.BK_PhieuKhamBenh)
+                .WithRequired(e => e.HoSoBenhNhan)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HoSoBenhNhan>()
                 .HasMany(e => e.PhieuKhamBenhs)
                 .WithRequired(e => e.HoSoBenhNhan)
                 .WillCascadeOnDelete(false);
@@ -72,6 +98,16 @@ namespace MvcAppMain.Models
             modelBuilder.Entity<PhieuKhamBenh>()
                 .Property(e => e.TrieuChung)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PhieuKhamBenh>()
+                .HasMany(e => e.BK_CT_PhieuKhamBenh)
+                .WithRequired(e => e.PhieuKhamBenh)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PhieuKhamBenh>()
+                .HasMany(e => e.BK_HoaDon)
+                .WithRequired(e => e.PhieuKhamBenh)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PhieuKhamBenh>()
                 .HasMany(e => e.CT_PhieuKhamBenh)
@@ -90,6 +126,11 @@ namespace MvcAppMain.Models
             modelBuilder.Entity<Thuoc>()
                 .Property(e => e.TenThuoc)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Thuoc>()
+                .HasMany(e => e.BK_CT_PhieuKhamBenh)
+                .WithRequired(e => e.Thuoc)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Thuoc>()
                 .HasMany(e => e.CT_PhieuKhamBenh)

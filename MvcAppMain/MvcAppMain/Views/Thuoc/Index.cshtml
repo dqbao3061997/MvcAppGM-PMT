@@ -5,48 +5,63 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<fieldset>
+    <legend>
+        @if (Session["Roles"].Equals("admin"))
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DonVi.TenDonVi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenThuoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DonGia)
-        </th>
-        <th></th>
-    </tr>
+    {
+        <h2>DANH SÁCH THUỐC</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DonVi.TenDonVi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenThuoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DonGia)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Thuoc }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Thuoc }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Thuoc })
-        </td>
-    </tr>
+        <p>
+            @Html.ActionLink("Thêm thuốc mới", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Đơn Vị")
+                </th>
+                <th>
+                    @Html.Label("Tên Thuốc")
+                </th>
+                <th>
+                    @Html.Label("Số Lượng Thuốc")
+                </th>
+                <th>
+                    @Html.Label("Đơn Giá Thuốc")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonVi.TenDonVi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenThuoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGia)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa thông tin thuốc", "Edit", new { id = item.ID_Thuoc }) |
+                    @Html.ActionLink("Xem thông tin thuốc chi tiết", "Details", new { id = item.ID_Thuoc }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID_Thuoc })
+                </td>
+            </tr>
+    }
+
+        </table>
 }
-
-</table>
+else
+{
+    <text>
+        @Session["Username"].ToString()! You should be an admin to have valid to view this page
+    </text>
+}
+    </legend>
+            </fieldset>

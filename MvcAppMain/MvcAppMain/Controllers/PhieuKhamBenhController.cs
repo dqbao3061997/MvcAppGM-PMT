@@ -6,21 +6,24 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MvcAppMain.Filters;
 using MvcAppMain.Models;
 
 namespace MvcAppMain.Controllers
 {
+    
     public class PhieuKhamBenhController : Controller
     {
-        private QLPMContext db = new QLPMContext();
+        QLPMContext db = new QLPMContext();
 
         // GET: PhieuKhamBenh
+        
         public ActionResult Index()
         {
             var phieuKhamBenhs = db.PhieuKhamBenhs.Include(p => p.Benh).Include(p => p.HoSoBenhNhan);
             return View(phieuKhamBenhs.ToList());
         }
-
+        
         public ActionResult DanhSachKhamBenh(DateTime? date) {
             if (!date.HasValue) date = date.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
 
@@ -29,6 +32,7 @@ namespace MvcAppMain.Controllers
             return View(phieuKhamBenhs.ToList());
         }
         // GET: PhieuKhamBenh/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,8 @@ namespace MvcAppMain.Controllers
         }
 
         // GET: PhieuKhamBenh/PhieuKhamBenh
+        
+        
         public ActionResult PhieuKhamBenh()
         {
             
@@ -59,14 +65,21 @@ namespace MvcAppMain.Controllers
         //public int GetIDBenhNhan(int ID_NgayKham) {
 
         //}
-        public ActionResult DanhSachBenhNhan()
+        
+        public ActionResult DanhSachBenhNhan(string searchString)
         {
-            var phieuKhamBenhs = db.PhieuKhamBenhs.Include(p => p.Benh).Include(p => p.HoSoBenhNhan);
+            //var phieuKhamBenhs = db.PhieuKhamBenhs.Include(p => p.Benh).Include(p => p.HoSoBenhNhan);
+            var phieuKhamBenhs = from e in db.PhieuKhamBenhs.Include(p => p.Benh).Include(p => p.HoSoBenhNhan)
+                                 select e;
+            if (!String.IsNullOrEmpty(searchString)) {
+                phieuKhamBenhs = phieuKhamBenhs.Where(s => s.HoSoBenhNhan.HoTen.Contains(searchString));
+            }
             return View(phieuKhamBenhs.ToList());
         }
         // POST: PhieuKhamBenh/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PhieuKhamBenh([Bind(Include = "ID_PhieuKham,ID_BenhNhan,ID_Benh,NgayKham,TrieuChung")] PhieuKhamBenh phieuKhamBenh)
@@ -85,7 +98,7 @@ namespace MvcAppMain.Controllers
             ViewBag.ID_BenhNhan = new SelectList(db.HoSoBenhNhans, "ID_BenhNhan", "HoTen", phieuKhamBenh.ID_BenhNhan);
             return View(phieuKhamBenh);
         }
-
+       
         // GET: PhieuKhamBenh/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -106,6 +119,7 @@ namespace MvcAppMain.Controllers
         // POST: PhieuKhamBenh/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_PhieuKham,ID_BenhNhan,ID_Benh,TrieuChung")] PhieuKhamBenh phieuKhamBenh)
@@ -122,6 +136,7 @@ namespace MvcAppMain.Controllers
         }
 
         // GET: PhieuKhamBenh/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,6 +152,7 @@ namespace MvcAppMain.Controllers
         }
 
         // POST: PhieuKhamBenh/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

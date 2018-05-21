@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>THÔNG TIN KẾT QUẢ KHÁM BỆNH</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm thông khám khác", "Create")
 </p>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ID_PhieuKham)
+            @Html.Label("Số Phiếu Khám")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CachDung.TenCachDung)
+            @Html.Label("Cách Dùng")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhieuKhamBenh.TrieuChung)
+            @Html.Label("Triệu Chứng")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Thuoc.TenThuoc)
+            @Html.Label("Tên Thuốc")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Thuoc.ID_DonVi)
+            @Html.Label("Đơn Vị")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoLuongThuocLay)
+            @Html.Label("Số Lượng Thuốc Lấy")
         </th>
         <th></th>
     </tr>
@@ -55,10 +55,10 @@
             @Html.DisplayFor(modelItem => item.SoLuongThuocLay)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |
-            @Html.ActionLink("Create", "Create", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |
-            @Html.ActionLink("Details", "Details", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) })
+            @Html.ActionLink("Chỉnh sửa thông tin", "Edit", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |
+            @*@Html.ActionLink("Create", "Create", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |*@
+            @Html.ActionLink("Xem thông tin chi tiết", "Details", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = Convert.ToInt32(Session["ID_PhieuKham"]) })
         </td>
     </tr>
 

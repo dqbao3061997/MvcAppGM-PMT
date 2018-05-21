@@ -5,24 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>HÓA ĐƠN</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Backup hoá đơn", "Backup")
+    @*<br />
+    @Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PhieuKhamBenh.HoSoBenhNhan.HoTen)
+            @Html.Label("Họ Tên")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhieuKhamBenh.NgayKham)
+            @Html.Label("Ngày Khám")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TienKham)
+            @Html.Label("Tiền Khám")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TienThuoc)
+            @Html.Label("Tiền Thuốc")
         </th>
        
         <th></th>
@@ -44,9 +46,9 @@
         </td>
        
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Chỉnh sửa thông tin", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Xem thông tin chi tiết", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

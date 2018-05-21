@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using CrystalDecisions.CrystalReports.Engine;
+using Microsoft.Reporting.WebForms;
 using MvcAppMain.Models;
+using MvcAppMain.Report;
+using MvcAppMain.Report.DSBaoCaoSuDungThuocTableAdapters;
 
 namespace MvcAppMain.Controllers
 {
     public class CT_PhieuKhamBenhController : Controller
     {
-        private QLPMContext db = new QLPMContext();
+        QLPMContext db = new QLPMContext();
 
         // GET: CT_PhieuKhamBenh
         public ActionResult Index()
@@ -28,6 +34,98 @@ namespace MvcAppMain.Controllers
             //return View(cT_PhieuKhamBenh.ToList());
         }
 
+        public ActionResult BaoCaoSuDungThuoc() {
+            var baocaosudungthuoc = db.CT_PhieuKhamBenh.Include(p => p.PhieuKhamBenh).Include(p => p.Thuoc).Include(p => p.CachDung);
+            return View(baocaosudungthuoc.ToList());
+        }
+
+        //public ActionResult Export()
+        //{
+
+
+        //    ReportDocument rd = new ReportDocument();
+        //    rd.Load(Path.Combine(Server.MapPath("~/Report/CRBaoCaoSuDungThuoc.rpt")));
+        //    DSBaoCaoSuDungThuoc dataset = new DSBaoCaoSuDungThuoc();
+        //    ThuocTableAdapter thuocAdapter = new ThuocTableAdapter();
+        //    //HoaDonTableAdapter hoadonAdapter = new HoaDonTableAdapter();
+        //    //hoadonAdapter.Fill(dataset.HoaDon);
+        //    thuocAdapter.Fill(dataset.Thuoc);
+
+        //    rd.SetDataSource(dataset);
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
+
+        //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    stream.Seek(0, SeekOrigin.Begin);
+        //    return File(stream, "application/pdf", "BaoCaoSuDungThuocTheoNgay.pdf");
+
+        //}
+
+        public ActionResult Report()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Report(FormCollection collection)
+        {
+            try
+            {
+                int date = Convert.ToInt32(collection["month"].ToString());
+
+                return RedirectToAction("ReportThuoc", new { dt = date });
+            }
+            catch (FormatException)
+            {
+                ModelState.AddModelError("ErrorMessage", "Vui lòng nhập đúng tháng");
+                return View();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("ErrorMessage", "Vui lòng nhập đúng tháng");
+                return View();
+            }
+        }
+        public ActionResult CreateDefaultFolder()
+        {
+            string rootDirectory = "C:\\ReportThuoc";
+            if (!Directory.Exists(rootDirectory))
+            {
+                Directory.CreateDirectory(rootDirectory);
+                ViewBag.Success = "Thành công";
+            }
+            else
+            {
+                ModelState.AddModelError("ErrorMessage", "Thư mục đã tồn tại!!");
+                return View("Report");
+            }
+            return View("Report");
+
+        }
+
+        public ActionResult ReportThuoc(int dt)
+        {
+            SetLocalReport(dt);
+
+            return View();
+        }
+        private void SetLocalReport(int dt)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = true;
+            reportViewer.Width = Unit.Percentage(500);
+            reportViewer.Height = Unit.Percentage(500);
+
+            DSBaoCaoSuDungThuoc dataset = new DSBaoCaoSuDungThuoc();
+            ThuocTableAdapter thuocTableAdapter = new ThuocTableAdapter();
+            thuocTableAdapter.Fill(dataset.Thuoc, dt);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Report\ReportBaoCaoSuDungThuoc.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DSBaoCaoSuDungThuoc", dataset.Tables[0]));
+
+            ViewBag.ReportViewer = reportViewer;
+        }
         // GET: CT_PhieuKhamBenh/Details/5
         public ActionResult Details(int? id)
         {

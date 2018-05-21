@@ -5,24 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DanhSachBenhNhan</h2>
+<h2>DANH SÁCH BỆNH NHÂN</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Đăng Ký Bệnh Nhân", "Create")
 </p>
+@using (Html.BeginForm()) {
+    <p>
+        Tìm Theo Tên: @Html.TextBox("SearchString")
+        <input type="submit" value="Tìm Kiếm" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.HoTen)
+            @Html.Label("Họ Tên")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.NgayKham)
+            @Html.Label("Ngày Khám")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Benh.TenBenh)
+            @Html.Label("Bệnh")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrieuChung)
+            @Html.Label("Triệu Chứng")
         </th>
         <th></th>
     </tr>
@@ -33,7 +39,7 @@
             @Html.DisplayFor(modelItem => item.HoSoBenhNhan.HoTen)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HoSoBenhNhan.NgayKham)
+            @Html.DisplayFor(modelItem => item.NgayKham)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Benh.TenBenh)
@@ -42,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.TrieuChung)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID_PhieuKham }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID_PhieuKham }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID_PhieuKham })
+            @Html.ActionLink("Chỉnh sửa thông tin", "Edit", new { id = item.ID_PhieuKham }) |
+            @Html.ActionLink("Xem thông tin chi tiết", "Details", new { id = item.ID_PhieuKham }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ID_PhieuKham })
         </td>
     </tr>
 }

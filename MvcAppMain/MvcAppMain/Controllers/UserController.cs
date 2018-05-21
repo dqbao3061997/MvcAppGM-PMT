@@ -11,7 +11,7 @@ namespace MvcAppMain.Controllers
 {
     public class UserController : Controller
     {
-        private QLPMContext db = new QLPMContext();
+        QLPMContext db = new QLPMContext();
 
         // GET: User
         [AdminFilter]
@@ -149,7 +149,7 @@ namespace MvcAppMain.Controllers
                         Session["Roles"] = obj.Roles.ToString();
 
                         FormsAuthentication.SetAuthCookie(user.Username, false);
-                        return RedirectToAction("Index","User");
+                        return RedirectToAction("Index","TrangChu");
                     }
                     
                 }

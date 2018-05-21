@@ -86,9 +86,33 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReportViewerForMvc14.140.1000.523\lib\net45\ReportViewerForMvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -161,18 +185,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="clsNgayKham.cs" />
+    <Compile Include="Controllers\BenhController.cs" />
+    <Compile Include="Controllers\CachDungController.cs" />
     <Compile Include="Controllers\CT_PhieuKhamBenhController.cs" />
+    <Compile Include="Controllers\DonViController.cs" />
     <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HoSoBenhNhanController.cs" />
     <Compile Include="Controllers\PhieuKhamBenhController.cs" />
+    <Compile Include="Controllers\ThayDoiQuyDinhController.cs" />
     <Compile Include="Controllers\ThuocController.cs" />
+    <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\AdminFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Benh.cs" />
+    <Compile Include="Models\BK_CT_PhieuKhamBenh.cs" />
+    <Compile Include="Models\BK_HoaDon.cs" />
+    <Compile Include="Models\BK_PhieuKhamBenh.cs" />
     <Compile Include="Models\CachDung.cs" />
     <Compile Include="Models\CT_PhieuKhamBenh.cs" />
     <Compile Include="Models\DonVi.cs" />
@@ -184,12 +216,34 @@
     <Compile Include="Models\Thuoc.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\CRBaoCaoDoanhThu.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRBaoCaoDoanhThu.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CRBaoCaoSuDungThuoc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRBaoCaoSuDungThuoc.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\DSBaoCaoDoanhThu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBaoCaoDoanhThu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DSBaoCaoSuDungThuoc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBaoCaoSuDungThuoc.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -236,6 +290,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Images\background-login.jpg" />
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -246,6 +302,28 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Report\DSBaoCaoDoanhThu.xsc">
+      <DependentUpon>DSBaoCaoDoanhThu.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DSBaoCaoDoanhThu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBaoCaoDoanhThu.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DSBaoCaoDoanhThu.xss">
+      <DependentUpon>DSBaoCaoDoanhThu.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\DSBaoCaoSuDungThuoc.xsc">
+      <DependentUpon>DSBaoCaoSuDungThuoc.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DSBaoCaoSuDungThuoc.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBaoCaoSuDungThuoc.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DSBaoCaoSuDungThuoc.xss">
+      <DependentUpon>DSBaoCaoSuDungThuoc.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -275,7 +353,10 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="SQLTrigger\TriggerSoLuongBenhNhanToiDa.sql" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -320,11 +401,34 @@
     <Content Include="Views\HoaDon\Edit.cshtml" />
     <Content Include="Views\HoaDon\Index.cshtml" />
     <Content Include="Views\PhieuKhamBenh\DanhSachKhamBenh.cshtml" />
+    <Content Include="Views\CT_PhieuKhamBenh\BaoCaoSuDungThuoc.cshtml" />
+    <Content Include="Views\TrangChu\Index.cshtml" />
+    <Content Include="Views\Shared\LayoutLogin.cshtml" />
+    <Content Include="Views\HoaDon\Success.cshtml" />
+    <Content Include="Views\ThayDoiQuyDinh\Index.cshtml" />
+    <Content Include="Views\Benh\Create.cshtml" />
+    <Content Include="Views\Benh\Delete.cshtml" />
+    <Content Include="Views\Benh\Details.cshtml" />
+    <Content Include="Views\Benh\Edit.cshtml" />
+    <Content Include="Views\Benh\Index.cshtml" />
+    <Content Include="Views\DonVi\Create.cshtml" />
+    <Content Include="Views\DonVi\Delete.cshtml" />
+    <Content Include="Views\DonVi\Details.cshtml" />
+    <Content Include="Views\DonVi\Edit.cshtml" />
+    <Content Include="Views\DonVi\Index.cshtml" />
+    <Content Include="Views\CachDung\Create.cshtml" />
+    <Content Include="Views\CachDung\Delete.cshtml" />
+    <Content Include="Views\CachDung\Details.cshtml" />
+    <Content Include="Views\CachDung\Edit.cshtml" />
+    <Content Include="Views\CachDung\Index.cshtml" />
+    <Content Include="Views\HoaDon\Report.cshtml" />
+    <Content Include="Views\HoaDon\ReportDoanhThu.cshtml" />
+    <Content Include="Views\CT_PhieuKhamBenh\Report.cshtml" />
+    <Content Include="Views\CT_PhieuKhamBenh\ReportThuoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CrystalReports\" />
-    <Folder Include="Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -339,7 +443,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\CRBaoCaoDoanhThu.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRBaoCaoDoanhThu.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CRBaoCaoSuDungThuoc.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRBaoCaoSuDungThuoc.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ReportBaoCaoDoanhThu.rdlc" />
+    <EmbeddedResource Include="Report\ReportBaoCaoSuDungThuoc.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

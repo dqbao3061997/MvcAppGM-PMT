@@ -13,6 +13,7 @@ namespace MvcAppMain.Models
         public Benh()
         {
             PhieuKhamBenhs = new HashSet<PhieuKhamBenh>();
+            BK_PhieuKhamBenh = new HashSet<BK_PhieuKhamBenh>();
         }
 
         [Key]
@@ -23,5 +24,8 @@ namespace MvcAppMain.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuKhamBenh> PhieuKhamBenhs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BK_PhieuKhamBenh> BK_PhieuKhamBenh { get; set; }
     }
 }

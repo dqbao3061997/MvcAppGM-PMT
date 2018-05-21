@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <div class="form-horizontal" style="margin-top:100px">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+
+            <div class="col-md-8 col-sm-9 col-xs-12">
+                @using (Html.BeginForm("Report", "CT_PhieuKhamBenh", FormMethod.Post, new { @id = "myform" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel panel-default">
+                        <Center>
+                            <h2>BÁO CÁO SỬ DỤNG THUỐC</h2>
+                        </Center>
+                        <div class="panel-body">
+                            <br />
+                            <div class="form-group">
+                                <p style="color:yellow;padding-left:40px">
+                                    Vui lòng tạo thư mục chứa Báo cáo.
+                                    <a href="/CT_PhieuKhamBenh/CreateDefaultFolder">Click Here</a>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-inline center-block">
+                                    <div class="form-group col-md-6">
+                                        @Html.Label("Tháng:", htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="time" name="month">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="submit" value="Create" class="btn btn-success" />
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-left:40px;font-size:medium">
+                                    @Html.ValidationMessage("ErrorMessage", new { style = "color:red" })
+                                    <label style="color:orangered">@ViewBag.Success</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <label style="color:white;font-style:italic">(*) Vui lòng lưu file vào đường dẫn: C:\ReportThuoc</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+

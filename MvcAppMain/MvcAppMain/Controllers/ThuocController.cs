@@ -12,7 +12,7 @@ namespace MvcAppMain.Controllers
 {
     public class ThuocController : Controller
     {
-        private QLPMContext db = new QLPMContext();
+        QLPMContext db = new QLPMContext();
 
         // GET: Thuoc
         public ActionResult Index()
@@ -21,6 +21,7 @@ namespace MvcAppMain.Controllers
             return View(thuocs.ToList());
         }
 
+        
         // GET: Thuoc/Details/5
         public ActionResult Details(int? id)
         {

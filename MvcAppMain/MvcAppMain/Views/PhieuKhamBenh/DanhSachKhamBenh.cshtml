@@ -5,65 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DanhSachKhamBenh</h2>
+<fieldset>
+    <legend>
+        @if (Session["Roles"].Equals("admin"))
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@{
-    var date = (DateTime)ViewBag.date;
-}
-@using (Html.BeginForm("DanhSachKhamBenh", "PhieuKhamBenh", FormMethod.Get))
-{
-    <div>
-        Ngay Kham: @Html.TextBox("date", string.Format("{0:MMM dd yyyy }", date), new { @class = "datefield", type = "date" })
-        <input type="submit" value="Search" />
-    </div>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.GioiTinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.NamSinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoSoBenhNhan.DiaChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKham)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoSoBenhNhan.HoTen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoSoBenhNhan.GioiTinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoSoBenhNhan.NamSinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoSoBenhNhan.DiaChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayKham)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_BenhNhan }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_BenhNhan }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_BenhNhan })
-            </td>
-        </tr>
+        <h2>DANH SÁCH KHÁM BỆNH</h2>
+
+       
+        using (Html.BeginForm("DanhSachKhamBenh", "PhieuKhamBenh", FormMethod.Get))
+        {
+            <div>
+                Ngay Kham: @Html.TextBox("date", string.Format("{0:MMM dd yyyy }", (DateTime)ViewBag.date), new { @class = "datefield", type = "date" })
+                <input type="submit" value="Search" />
+            </div>
+        }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Họ Tên")
+                </th>
+                <th>
+                    @Html.Label("Giới Tính")
+                </th>
+                <th>
+                    @Html.Label("Năm Sinh")
+                </th>
+                <th>
+                    @Html.Label("Địa Chỉ")
+                </th>
+                <th>
+                    @Html.Label("Ngày Khám")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoSoBenhNhan.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoSoBenhNhan.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoSoBenhNhan.NamSinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoSoBenhNhan.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayKham)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sử thông tin", "Edit", new { id = item.ID_BenhNhan }) |
+                    @Html.ActionLink("Xem thông tin chi tiết", "Details", new { id = item.ID_BenhNhan }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID_BenhNhan })
+                </td>
+            </tr>
     }
 
-</table>
+        </table>
+}
+else
+{
+    <text>
+        @Session["Username"].ToString()! You should be an admin to have valid to view this page
+    </text>
+}
+    </legend>
+            </fieldset>

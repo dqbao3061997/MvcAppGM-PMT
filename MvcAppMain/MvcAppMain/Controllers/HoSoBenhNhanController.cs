@@ -12,7 +12,7 @@ namespace MvcAppMain.Controllers
 {
     public class HoSoBenhNhanController : Controller
     {
-        private QLPMContext db = new QLPMContext();
+        QLPMContext db = new QLPMContext();
 
         // GET: HoSoBenhNhan
         //public ActionResult DanhSachKhamBenh(DateTime? date)
@@ -54,6 +54,11 @@ namespace MvcAppMain.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                if (hoSoBenhNhan.GioiTinh == true)
+                    Session["GioiTinh"] = "Nam";
+                else
+                    Session["GioiTinh"] = "Nữ";
                 db.HoSoBenhNhans.Add(hoSoBenhNhan);
                 db.SaveChanges();
                 //Session["NgayKham"] = hoSoBenhNhan.NgayKham;

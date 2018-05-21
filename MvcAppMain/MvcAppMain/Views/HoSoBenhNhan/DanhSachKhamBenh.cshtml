@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MvcAppMain.Models.HoSoBenhNhan>
+
+@{
+    ViewBag.Title = "DanhSachKhamBenh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@{
+    var date = (DateTime)ViewBag.date;
+}
+
+@using (Html.BeginForm("DanhSachKhamBenh", "HoSoBenhNhan", FormMethod.Get))
+{
+    <div>
+        Ngay Kham: @Html.TextBox("date", string.Format("{0:MMM dd yyyy }", date), new { @class = "datefield", type = "date" })
+        <input type="submit" value="Search" />
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamSinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKham)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamSinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKham)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_BenhNhan }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_BenhNhan }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_BenhNhan })
+            </td>
+        </tr>
+    }
+
+</table>
